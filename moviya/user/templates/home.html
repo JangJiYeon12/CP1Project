@@ -1,0 +1,27 @@
+<div class = "raw">
+    <div class = "col-12" >
+      <div class = "col-12 text-center">
+<h1>메인</h1>
+<br><br>
+
+</div>
+<form method = "POST">
+  {% csrf_token %}
+  {% if login == False %}
+    미 로그인 상태입니다. 로그인 해주세요.
+    <br><br><br><br><br><br>
+    <a href="{%  url 'login' %}">
+        <input type="button" value="로그인">
+    </a>
+    <br><br><br>
+    <a href="{%  url 'register' %}">
+        <input type="button" value="회원등록">
+    </a>
+    {% else %}
+    {{ username }} 님 안녕하세요!
+    <br><br><br>
+    <a href="{%  url 'logout' %}">
+        <input type="button" value="로그아웃">
+    </a>
+    {% endif %}
+</form>

@@ -18,13 +18,15 @@ def register(request):   #회원가입 페이지를 보여주기 위한 함수
         res_data = {} 
         if not (username and password and re_password) :
             res_data['error'] = "모든 값을 입력해야 합니다."
+            return render(request, 'register.html', res_data) #register를 요청받으면 register.html 로 응답.
         if password != re_password :
             # return HttpResponse('비밀번호가 다릅니다.')
             res_data['error'] = '비밀번호가 다릅니다.'
+            return render(request, 'register.html', res_data)
         else :
             user = User(username=username, password=make_password(password))
             user.save()
-        return render(request, 'register.html', res_data) #register를 요청받으면 register.html 로 응답.
+            return redirect('login')
 
 def login(request):
     response_data = {}
@@ -54,11 +56,17 @@ def login(request):
 
 def home(request):
     user_id = request.session.get('user')
+    context = {
+        'login' : False,
+        'username' : None
+    }
     if user_id :
         myuser_info = User.objects.get(pk=user_id)  #pk : primary key
-        return HttpResponse(myuser_info.username)   # 로그인을 했다면, username 출력
+        context['username'] = myuser_info
+        context['login'] = True
+        return render(request, 'home.html',context)
 
-    return HttpResponse('로그인을 해주세요.') #session에 user가 없다면, (로그인을 안했다면)
+    return render(request, 'home.html', context) #session에 user가 없다면, (로그인을 안했다면)
     
     
 def logout(request):
