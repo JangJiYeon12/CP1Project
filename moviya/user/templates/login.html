@@ -1,7 +1,15 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/user.css' %}">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+</head>
+
 <div class = "raw">
     <div class = "col-12" >
       <div class = "col-12 text-center">
-<h1>로그인</h1>
+<h1>MOVIYAAAA</h1>
 <br><br>
 
 </div>
@@ -9,16 +17,16 @@
   {% csrf_token %}
   
   <div class="form-group">
-    <label for="username">사용자 이름</label>
+    <label for="username">ID</label>
     <input type="text" 
     class="form-control" 
     name = "username" 
     id="username" 
-    placeholder="이름을 입력하세요">
+    placeholder="아이디를 입력하세요">
   </div>
 
   <div class="form-group">
-    <label for="password">비밀번호</label>
+    <label for="password">PASSWORD</label>
     <input type="password" 
     name = "password" 
     class="form-control" id="password" placeholder="비밀번호를 입력하세요">
@@ -26,5 +34,7 @@
 
 
   <span style="color:red;"><strong>{{ error }}</strong> </span>
-  <button type="submit" class="btn btn-primary">로그인</button>
+  <div class="btn-group">
+  <button type="submit" class="btn btn-outline-light">로그인</button>
+  </div>
 </form>

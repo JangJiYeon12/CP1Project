@@ -1,0 +1,44 @@
+h1 {
+    color: #f80000;
+    background-color: rgb(43, 43, 43);
+    font-family: 'Lobster';
+}
+
+.btn1 {
+    color: #c02626;
+    text-decoration: none;
+    position: absolute;
+    top: 10%;
+    left: 90%;
+    
+    transform: translate(-50%, -50%);
+}
+
+.btn2 {
+    color: #c02626;
+    text-decoration: none;
+    position: absolute;
+    top: 10%;
+    left: 80%;
+    
+    transform: translate(-50%, -50%);
+}
+
+.btn-group {
+    color: #c23434;
+    top: 50%;
+    left: 47%;
+}
+
+.content {
+    color: #777777;
+    font-size: 20pt;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-group {
+
+}

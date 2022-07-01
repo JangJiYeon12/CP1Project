@@ -1,27 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/user.css' %}">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+</head>
+
 <div class = "raw">
     <div class = "col-12" >
       <div class = "col-12 text-center">
-<h1>메인</h1>
+<h1>MOVIYAAAA</h1>
 <br><br>
-
 </div>
+
 <form method = "POST">
   {% csrf_token %}
   {% if login == False %}
-    미 로그인 상태입니다. 로그인 해주세요.
+    <div class="content">로그인 또는 회원가입을 해주세요.</div>
     <br><br><br><br><br><br>
+    
     <a href="{%  url 'login' %}">
-        <input type="button" value="로그인">
+        <div class="btn2">
+        <input type="button" class="btn btn-outline-light" value="로그인">
+        </div>
     </a>
+    
     <br><br><br>
+    
     <a href="{%  url 'register' %}">
-        <input type="button" value="회원등록">
+        <div class="btn1">
+        <input type="button" class="btn btn-outline-light" value="회원등록">
+        </div>
     </a>
+    
     {% else %}
     {{ username }} 님 안녕하세요!
     <br><br><br>
+    
     <a href="{%  url 'logout' %}">
+        <div class="btn-group">
         <input type="button" value="로그아웃">
+        </div>
     </a>
+    
     {% endif %}
 </form>
