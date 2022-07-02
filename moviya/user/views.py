@@ -48,7 +48,7 @@ def login(request):
                 request.session['user'] = myuser.id 
                 #세션도 딕셔너리 변수 사용과 똑같이 사용하면 된다.
                 #세션 user라는 key에 방금 로그인한 id를 저장한것.
-                return redirect('/')
+                return redirect('/user')
             else:
                 response_data['error'] = "비밀번호를 틀렸습니다."
 
@@ -71,4 +71,4 @@ def home(request):
     
 def logout(request):
     request.session.pop('user')
-    return redirect('/')
+    return redirect('/user')
