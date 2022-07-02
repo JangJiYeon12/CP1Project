@@ -5,14 +5,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'user/user.css' %}">
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 </head>
-
-<div class = "raw">
+<body>
+  <div class = "raw">
     <div class = "col-12" >
       <div class = "col-12 text-center">
-<h1>MOVIYAAAA</h1>
-<br><br>
+        <h1>MOVIYAAAA</h1>
+        <br><br>
 
-</div>
+      </div>
+    </div>
+  </div>
 <form method = "POST">
   {% csrf_token %}
   
@@ -38,3 +40,5 @@
   <button type="submit" class="btn btn-outline-light">로그인</button>
   </div>
 </form>
+</body>
+</html>
