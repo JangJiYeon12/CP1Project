@@ -6,35 +6,40 @@
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 </head>
 
-<div class = "raw">
-    <div class = "col-12" >
-      <div class = "col-12 text-center">
-<h1>MOVIYAAAA</h1>
-<br><br>
+<body>
+  <div class = "raw">
+      <div class = "col-12" >
+        <div class = "col-12 text-center">
+  <h1>MOVIYAAAA</h1>
+  <br><br>
 
-</div>
-<form method = "POST">
-  {% csrf_token %}
-  
-  <div class="form-group">
-    <label for="username">ID</label>
-    <input type="text" 
-    class="form-control" 
-    name = "username" 
-    id="username" 
-    placeholder="아이디를 입력하세요">
   </div>
+  <form method = "POST">
+    {% csrf_token %}
+    
+    <div class="box">
+      <div class="head">
+        <p>Login in to MOVIYAAAA</p>
+      </div>
+      <div class="form-group">
+        <label for="username"></label>
+        <input type="text" 
+        class="form-control" 
+        name = "username" 
+        id="username" 
+        placeholder="아이디 입력 칸">
 
-  <div class="form-group">
-    <label for="password">PASSWORD</label>
-    <input type="password" 
-    name = "password" 
-    class="form-control" id="password" placeholder="비밀번호를 입력하세요">
-  </div>
+        <label for="password"></label>
+        <input type="password" 
+        name = "password" 
+        class="form-control" id="password" placeholder="비밀번호 입력 칸">
+      </div>
 
 
-  <span style="color:red;"><strong>{{ error }}</strong> </span>
-  <div class="btn-group">
-  <button type="submit" class="btn btn-outline-light">로그인</button>
-  </div>
-</form>
+    <span style="color:red;"><strong>{{ error }}</strong> </span>
+    <div class="btn-group">
+    <button type="submit" class="btn btn-outline-light">Log in</button>
+    </div>
+    </div>
+  </form>
+</body>

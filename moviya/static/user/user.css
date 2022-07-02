@@ -4,6 +4,20 @@ h1 {
     font-family: 'Lobster';
 }
 
+body {
+    background-color: rgb(223, 223, 223);
+}
+
+.head {
+    color: #ffffff;
+    font-size: 20pt;
+    height: 40px;
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .btn1 {
     color: #c02626;
     text-decoration: none;
@@ -26,8 +40,8 @@ h1 {
 
 .btn-group {
     color: #c23434;
-    top: 50%;
-    left: 47%;
+    top: 90%;
+    left: 40%;
 }
 
 .content {
@@ -40,5 +54,16 @@ h1 {
 }
 
 .form-group {
+    height: 90px;
+    width: 300px; /* 정렬하려는 요소의 넓이를 반드시 지정 */
+    margin: 50px auto;
+    color: white;
+}
 
+.box {
+    width: 400px;
+    margin: 30px auto;
+    background-color: rgb(199, 199, 199);
+    border: 3px solid #4d4d4d;
+    padding: 50px;
 }
