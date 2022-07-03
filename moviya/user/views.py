@@ -5,7 +5,7 @@ from .models import User
 
 from .models import User
 from django.contrib.auth.hashers import make_password, check_password #비밀번호 암호화 / 패스워드 체크(db에있는거와 일치성확인)
-import movSel
+from . import movSel
 
 # Create your views here.
 def register(request):   #회원가입 페이지를 보여주기 위한 함수
