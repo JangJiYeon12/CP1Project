@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/user.css' %}">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+</head>
+
+<div class = "raw">
+    <div class = "col-12" >
+      <div class = "col-12 text-center">
+<h1>MOVIYAAAA</h1>
+<br><br>
+</div>
+
+<form method = "POST">
+  {% csrf_token %}
+  <div class="box">
+    <div class="head">
+      <p>Account Setting to MOVIYAAAA</p>
+    </div>
+    <span style="color:red;"><strong>{{ error }}</strong> </span>
+    <div class="form-group">
+      <label for="searchmovie"></label>
+      <input type="text" 
+      class="form-control" 
+      name = "searchmovie" 
+      id="searchmovie" 
+      placeholder="영화 제목 검색">
+    </div>
+  <div class="btn-group">
+  <button type="submit" class="btn btn-outline-light">검색</button>
+</form>

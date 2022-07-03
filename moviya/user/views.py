@@ -5,6 +5,7 @@ from .models import User
 
 from .models import User
 from django.contrib.auth.hashers import make_password, check_password #비밀번호 암호화 / 패스워드 체크(db에있는거와 일치성확인)
+import movSel
 
 # Create your views here.
 def register(request):   #회원가입 페이지를 보여주기 위한 함수
@@ -72,3 +73,38 @@ def home(request):
 def logout(request):
     request.session.pop('user')
     return redirect('/user')
+
+
+def SearchMovie(request):
+    response_data = {}
+
+    if request.method == "GET" :
+        return render(request, 'searchmovie.html')
+
+    elif request.method == "POST":
+        movquery = request.POST.get('searchmovie', None)
+
+
+        if not movquery:
+            response_data['error']="영화 제목을 입력하세요"
+        else : 
+            data = movSel.Searmov(movquery)
+            context = {
+                'movies' : data
+            }
+            render(request,'movSel.html',context)
+
+
+        return render(request, 'searchmovie.html',response_data)
+
+def movieSelect(request):
+    context = {}
+    return render(request, 'movSel.html', context) 
+
+def movieview(request):
+    moviedata = request.GET.get('moviedata',None)
+    context = {
+        'poster_url' : movSel.IMG_BASE_URL+movSel.IMG_SIZE[1]+moviedata['poster_path'],
+        'moviename' : moviedata['title']+f"({moviedata['original_title']},{moviedata['original_language']})"
+    }
+    return render(request, 'movieview.html', context) 

@@ -5,5 +5,7 @@ urlpatterns = [
     path('register/', views.register ,name = 'register'),
     path('login/', views.login ,name = 'login' ),
     path('logout/', views.logout ,name = 'logout' ),
-    path('', views.home ,name = 'home' ),
+    path('searchmovie/', views.SearchMovie ,name = 'searchmovie' ),
+    path('movview/', name = 'movview' ),
+    path('movSel/', name = 'movSel' ),
 ]

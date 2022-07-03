@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/user.css' %}">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+</head>
+
+<div class = "raw">
+    <div class = "col-12" >
+      <div class = "col-12 text-center">
+<h1>MOVIYAAAA</h1>
+<br><br>
+</div>
+
+<form method = "POST">
+  {% csrf_token %}
+  <div class="box">
+    <div class="head">
+      <p>Select Movie to MOVIYAAAA</p>
+    </div>
+  </div>
+  <div class="content">자신이 찾는 영화를 선택해 주세요</div>
+  <br><br><br><br><br><br>
+  {% for movie in movies%}
+    <iframe src="{% url 'movview' %}?moviedata=movie"></iframe>
+  {% endfor %}
+  <br><br><br>
+  <a href="{%  url 'searchmovie' %}">
+    <div class="btn-group">
+    <input type="button" value="다시 검색하기">
+    </div>
+  </a>
+</form>
