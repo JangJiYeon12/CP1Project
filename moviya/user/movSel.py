@@ -1,6 +1,4 @@
 import requests
-import shutil
-from PIL import Image
 
 
 api_key = '99466f67aa497221d40f4e461bd31161'

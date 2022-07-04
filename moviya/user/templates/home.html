@@ -43,6 +43,17 @@
         <input type="button" value="로그아웃">
         </div>
     </a>
+    <br><br><br>
+    {% if setting == True%}
+    Your Movie
+    {% else %}
+    사용자 설정이 되어 있지 않습니다. {{username}} 님이 좋아하는 영화를 등록해 주세요.
+    <a href="{%  url 'searchmovie' %}">
+        <div class="btn-group">
+        <input type="button" value="영화 찾기">
+        </div>
+    </a>
+    {% endif %}
     
     {% endif %}
 </form>

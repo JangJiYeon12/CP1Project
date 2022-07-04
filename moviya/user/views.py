@@ -6,6 +6,7 @@ from .models import User
 from .models import User
 from django.contrib.auth.hashers import make_password, check_password #비밀번호 암호화 / 패스워드 체크(db에있는거와 일치성확인)
 from . import movSel
+import json
 
 # Create your views here.
 def register(request):   #회원가입 페이지를 보여주기 위한 함수
@@ -62,9 +63,10 @@ def home(request):
         'username' : None
     }
     if user_id :
-        myuser_info = User.objects.get(pk=user_id)  #pk : primary key
-        context['username'] = myuser_info
+        myuser_info = ''.join(list(str(User.objects.get(pk=user_id)))[1:-1]).split(' ')  #pk : primary key
+        context['username'] = myuser_info[0]
         context['login'] = True
+        context['setting'] = myuser_info[1]=='True'
         return render(request, 'home.html',context)
 
     return render(request, 'home.html', context) #session에 user가 없다면, (로그인을 안했다면)
@@ -92,7 +94,7 @@ def SearchMovie(request):
             context = {
                 'movies' : data
             }
-            render(request,'movSel.html',context)
+            return render(request,'movSel.html',context)
 
 
         return render(request, 'searchmovie.html',response_data)
@@ -102,9 +104,13 @@ def movieSelect(request):
     return render(request, 'movSel.html', context) 
 
 def movieview(request):
-    moviedata = request.GET.get('moviedata',None)
+    movie_id = request.GET.get('id',None)
+    title = request.GET.get('title',None)
+    ori_title = request.GET.get('original_title',None)
+    ori_lang = request.GET.get('original_language',None)
+    poster_path = request.GET.get('poster_path',None)
     context = {
-        'poster_url' : movSel.IMG_BASE_URL+movSel.IMG_SIZE[1]+moviedata['poster_path'],
-        'moviename' : moviedata['title']+f"({moviedata['original_title']},{moviedata['original_language']})"
+        'poster_url' : movSel.IMG_BASE_URL+movSel.IMG_SIZE[1]+poster_path,
+        'moviename' : title+f"({ori_title},{ori_lang})"
     }
-    return render(request, 'movieview.html', context) 
+    return render(request, 'movview.html', context) 

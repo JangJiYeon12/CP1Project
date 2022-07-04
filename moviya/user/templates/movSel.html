@@ -21,10 +21,12 @@
       <p>Select Movie to MOVIYAAAA</p>
     </div>
   </div>
-  <div class="content">자신이 찾는 영화를 선택해 주세요</div>
-  <br><br><br><br><br><br>
+  자신이 찾는 영화를 선택해 주세요
+  <br><br><br>
   {% for movie in movies%}
-    <iframe src="{% url 'movview' %}?moviedata=movie"></iframe>
+  <div style="width:1000px; height:300px; background-color:#CF0">
+    <iframe src="{% url 'movview' %}?id={{movie.id}}&title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}" height="300" width="1000"></iframe>
+  </div>
   {% endfor %}
   <br><br><br>
   <a href="{%  url 'searchmovie' %}">
