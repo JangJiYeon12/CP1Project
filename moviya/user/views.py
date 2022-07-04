@@ -7,6 +7,11 @@ from .models import User
 from django.contrib.auth.hashers import make_password, check_password #비밀번호 암호화 / 패스워드 체크(db에있는거와 일치성확인)
 from . import movSel
 
+import pickle
+from sklearn.neighbors import NearestNeighbors
+import pandas as pd
+from glob import glob
+
 # Create your views here.
 def register(request):   #회원가입 페이지를 보여주기 위한 함수
     if request.method == "GET":
@@ -108,3 +113,53 @@ def movieview(request):
         'moviename' : moviedata['title']+f"({moviedata['original_title']},{moviedata['original_language']})"
     }
     return render(request, 'movieview.html', context) 
+
+def mainpage(request):
+    #데이터와 모델을 받아옵니다
+    #m_list = pd.read_csv('data/m_data.csv', error_bad_lines=False, engine ='python')
+    m_list = glob("data/m_data.csv")
+
+    loaded_model = pickle.load(open('data/knnpickle_file', 'rb'))
+    loaded_data = pickle.load(open('data/eda_data', 'rb'))
+
+    loaded_model.fit(loaded_data)
+
+    response_data = {}
+
+    if request.method == "GET":
+        return render(request, 'register.html')
+
+    elif request.method == "POST":
+        code = request.POST.get('moviecode',None)
+        code = int(code)
+
+        if not (code):
+            response_data['error']="영화 코드를 입력해주세요"
+        else : 
+            index_movie_rate = loaded_data.loc[code,:].values.reshape(1,-1)
+
+            #가장 가까운 10편의 영화와 지정된 영화와의 거리를 구합니다.
+            distances,indices = loaded_model.kneighbors(index_movie_rate,n_neighbors = 11)
+
+            movie_list=[]
+            m = pd.DataFrame() 
+
+            for i in range(0,len(distances.flatten())):
+                get_movie = m_list.loc[m_list['id']==code]['title']
+            
+                if i==0:
+                    pass
+                else :
+                    indices_flat = indices.flatten()[i]
+                    get_movie = m_list.loc[m_list['id']==loaded_data.iloc[indices_flat,:].name]['title']
+                    movie_list.append(get_movie.to_frame().reset_index().set_index('index'))
+
+            for i in movie_list:
+                m = pd.concat([m,i])
+
+            m = m.reset_index()
+            m.columns = ['영화코드','영화명']
+            
+            response_data = m
+
+        return render(request, 'user/mainpage.html', response_data)
