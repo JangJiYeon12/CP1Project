@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
+from matplotlib.style import context
 from .models import User
 
 from .models import User
@@ -63,10 +64,17 @@ def home(request):
         'username' : None
     }
     if user_id :
-        myuser_info = ''.join(list(str(User.objects.get(pk=user_id)))[1:-1]).split(' ')  #pk : primary key
-        context['username'] = myuser_info[0]
+        myuser_info = User.objects.get(pk=user_id)
+        context['username'] = myuser_info.username
         context['login'] = True
-        context['setting'] = myuser_info[1]=='True'
+        context['setting'] = myuser_info.datasetting==True
+        if myuser_info.datasetting == True :
+            data = movSel.getMoviedata(myuser_info.usermovieid)
+            context['movie_id'] = data['id']
+            context['title'] = data['title']
+            context['original_title'] = data['original_title']
+            context['original_language'] = data['original_language']
+            context['poster_path'] = data['poster_path']
         return render(request, 'home.html',context)
 
     return render(request, 'home.html', context) #session에 user가 없다면, (로그인을 안했다면)
@@ -104,7 +112,6 @@ def movieSelect(request):
     return render(request, 'movSel.html', context) 
 
 def movieview(request):
-    movie_id = request.GET.get('id',None)
     title = request.GET.get('title',None)
     ori_title = request.GET.get('original_title',None)
     ori_lang = request.GET.get('original_language',None)
@@ -114,3 +121,23 @@ def movieview(request):
         'moviename' : title+f"({ori_title},{ori_lang})"
     }
     return render(request, 'movview.html', context) 
+
+def movieSelectMsg(request):
+    movie_id = request.GET.get('movie_id',None)
+    title = request.GET.get('title',None)
+    ori_title = request.GET.get('original_title',None)
+    ori_lang = request.GET.get('original_language',None)
+    poster_path = request.GET.get('poster_path',None)
+    context = {
+        'movie_id' : movie_id,
+        'title' : title,
+        'original_title' : ori_title,
+        'original_language' : ori_lang,
+        'poster_path' : poster_path
+    }
+    user_id = request.session.get('user')
+    user = User.objects.get(pk=user_id)
+    user.datasetting = True
+    user.usermovieid = movie_id
+    user.save()
+    return render(request, 'movSelmsg.html',context)

@@ -9,5 +9,6 @@ urlpatterns = [
     path('searchmovie/', views.SearchMovie ,name = 'searchmovie'),
     path('movview/', views.movieview ,name = 'movview'),
     path('movSel/', views.movieSelect, name = 'movSel'),
+    path('movSelmsg/', views.movieSelectMsg, name = 'movSmsg'),
     #path('mainpage', views.mainpage, name = 'mainpage'),
 ]

@@ -8,10 +8,13 @@ class User(models.Model): #장고에서 제공하는 models.Model를 상속받�
     registered_dttm = models.DateTimeField(auto_now_add=True,verbose_name='등록시간') 
     #저장되는 시점의 시간을 자동으로 삽입해준다.
     datasetting = models.BooleanField(default=False)
+    usermovieid = models.IntegerField(default=0)
 
 
     def __str__(self): # 이 함수 추가
-        return "<%s %s>" %(self.username, self.datasetting)  # User object 대신 나타낼 문자 
+        return "%s" %(self.username)  # User object 대신 나타낼 문자 
+
+    
     
 
 
