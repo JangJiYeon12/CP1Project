@@ -11,7 +11,10 @@ def print_similar_movies(index) :
     model_knn = KNNConfig.model
     m_list = KNNConfig.movlist
 
-    index_movie_rate = movie_wide.loc[index,:].values.reshape(1,-1)
+    try :
+        index_movie_rate = movie_wide.loc[index,:].values.reshape(1,-1)
+    except :
+        index_movie_rate = [[0]*len(movie_wide.iloc[0,:])]
 
     distances,indices = model_knn.kneighbors(index_movie_rate,n_neighbors = 11) 
 
