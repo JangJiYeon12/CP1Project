@@ -14,10 +14,6 @@ class User(models.Model): #장고에서 제공하는 models.Model를 상속받�
     def __str__(self): # 이 함수 추가
         return "%s" %(self.username)  # User object 대신 나타낼 문자 
 
-    
-    
-
-
     class Meta: #메타 클래스를 이용하여 테이블명 지정
         db_table = 'test_user'
 
@@ -39,7 +35,7 @@ class Rate(models.Model):
 
     def __str__(self):
         return self.movie_id
-"""
+
 
 class Movie(models.Model):
     movie_id = models.CharField(max_length=50)
@@ -58,4 +54,4 @@ class Rate(models.Model):
 
     def __str__(self):
         return self.movie_id
-    
+"""

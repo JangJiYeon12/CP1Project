@@ -1,17 +1,15 @@
-from pickletools import read_unicodestringnl
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password
-from .models import User, Movie, Rate
-from matplotlib.style import context
 from .models import User
+
+#from matplotlib.style import context
+#from django.http import HttpResponse, JsonResponse
+#from pickletools import read_unicodestringnl
 
 from django.contrib.auth.hashers import make_password, check_password #비밀번호 암호화 / 패스워드 체크(db에있는거와 일치성확인)
 from . import movSel
-
 from . import movie10
-import csv
-import json
+
 
 # Create your views here.
 def register(request):   #회원가입 페이지를 보여주기 위한 함수
@@ -73,12 +71,9 @@ def home(request):
         context['login'] = True
         context['setting'] = myuser_info.datasetting==True
         if myuser_info.datasetting == True :
-            data = movSel.getMoviedata(myuser_info.usermovieid)
-            context['movie_id'] = data['id']
-            context['title'] = data['title']
-            context['original_title'] = data['original_title']
-            context['original_language'] = data['original_language']
-            context['poster_path'] = data['poster_path']
+            movie_id = myuser_info.usermovieid
+            context.update(movSel.getMoviedata(movie_id))
+            context['movie_list'] = [movSel.getMoviedata(x) for x in movie10.print_similar_movies(movie_id)]
         return render(request, 'home.html',context)
 
     return render(request, 'home.html', context) #session에 user가 없다면, (로그인을 안했다면)
@@ -125,7 +120,7 @@ def movieview(request):
         'moviename' : title+f"({ori_title},{ori_lang})"
     }
     return render(request, 'movview.html', context) 
-
+'''
 def csvTomodel(request):
     #csv파일을 DB에 넣는 작업을 할 곳입니다.
 
@@ -219,7 +214,7 @@ def csvTomodel(request):
 def mainpage(request):
     #이건 나중에 movie10(동현님 모델)이랑 연결하려고 만든 페이지입니다.
     return HttpResponse(a)
-    
+'''
 def movieSelectMsg(request):
     movie_id = request.GET.get('movie_id',None)
     title = request.GET.get('title',None)
