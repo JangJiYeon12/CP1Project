@@ -35,22 +35,27 @@
     </a>
     
     {% else %}
-    {{ username }} 님 안녕하세요!
-    <br><br><br>
-    
-    <a href="{%  url 'logout' %}">
-        <div class="btn-group">
-        <input type="button" type="submit" class="btn btn-outline-light" value="로그아웃">
-        </div>
-    </a>
+    <p align="center">
+        {{ username }} 님 안녕하세요!
+        <br><br>
+        <a href="{%  url 'logout' %}">
+            <input type="button" value="로그아웃">
+        </a>
+    </p>
     <br><br><br>
     {% if setting == True%}
-    Selected Movie
-    <div style="width:500px; height: 300px; background-color:#CF0">
-        <iframe src="{% url 'movview' %}?title={{title}}&original_title={{original_title}}&original_language={{original_language}}&poster_path={{poster_path}}" height="300" width="500"></iframe>
-    </div>
-    <br><br><br>
-    Recommended
+    <p align="center">
+        Selected Movie
+        <br><br><br>
+        <iframe src="{% url 'movview' %}?title={{title}}&original_title={{original_title}}&original_language={{original_language}}&poster_path={{poster_path}}" height="320" width="200" style="background-color: #CF0;"></iframe>
+        <br><br><br>
+        Recommended
+    </p>
+    <br>
+    {% for movie in movie_list%}
+        <iframe src="{% url 'movview' %}?title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}" style="width:200px; height: 320px; background-color:#CF0;float:left;text-align: center;"></iframe>
+        
+    {% endfor %}
     <br><br><br>
     {% else %}
     사용자 설정이 되어 있지 않습니다. {{username}} 님이 좋아하는 영화를 등록해 주세요.

@@ -29,8 +29,8 @@
       {% for movie in movies%}
       <tr>
         <td>
-          <div style="width:500px; height:300px; background-color:#CF0">
-            <iframe src="{% url 'movview' %}?title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}" height="300" width="500"></iframe>
+          <div style="width:200px; height:320px; background-color:#CF0">
+            <iframe src="{% url 'movview' %}?title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}" height="320" width="200"></iframe>
           </div>
         </td>
         <td>

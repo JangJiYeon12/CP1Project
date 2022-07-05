@@ -31,7 +31,7 @@ def getMoviedata(movie_id) :
     url = BASE_URL + f'/movie/{movie_id}'
     params = {
         'api_key' : api_key,
-        'language' : 'ko',
+        'language' : 'ko'
     }
     resp = requests.get(url, params=params)
     data = resp.json()
