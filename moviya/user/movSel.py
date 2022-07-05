@@ -1,6 +1,4 @@
 import requests
-import shutil
-from PIL import Image
 
 
 api_key = '99466f67aa497221d40f4e461bd31161'
@@ -27,4 +25,14 @@ def Searmov(query) :
 
     resp = requests.get(url, params=params)
     data = resp.json()['results']
+    return data
+
+def getMoviedata(movie_id) :
+    url = BASE_URL + f'/movie/{movie_id}'
+    params = {
+        'api_key' : api_key,
+        'language' : 'ko',
+    }
+    resp = requests.get(url, params=params)
+    data = resp.json()
     return data

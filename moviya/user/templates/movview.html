@@ -1,2 +1,10 @@
 <!DOCTYPE html>
-{%<img src= poster_url >%}
+
+<form method = "GET">
+    {% csrf_token %}
+    <p align="center">
+    <img src={{poster_url}}>
+    <br>
+    {{moviename}}
+    </p>
+  </form>

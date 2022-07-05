@@ -18,17 +18,19 @@
   {% csrf_token %}
   <div class="box">
     <div class="head">
-      <p>영화 찾기</p>
+      <p>Selected Movie</p>
     </div>
-    <span style="color:red;"><strong>{{ error }}</strong> </span>
-    <div class="form-group">
-      <label for="searchmovie"></label>
-      <input type="text" 
-      class="form-control" 
-      name = "searchmovie" 
-      id="searchmovie" 
-      placeholder="영화 제목 검색">
+  </div>
+  당신이 선택한 영화는
+  <div style="width:500px; height:300px; background-color:#CF0">
+    <iframe src="{% url 'movview' %}?title={{title}}&original_title={{original_title}}&original_language={{original_language}}&poster_path={{poster_path}}" height="300" width="500"></iframe>
+  </div>
+  <br><br><br>
+  입니다.
+  <br><br><br>
+  <a href="{%  url 'home' %}">
+    <div class="btn-group">
+    <input type="button" value="확인">
     </div>
-  <div class="btn-group">
-  <button type="submit" class="btn btn-outline-light">검색</button>
+  </a>
 </form>

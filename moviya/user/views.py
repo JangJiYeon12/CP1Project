@@ -3,12 +3,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password
 from .models import User, Movie, Rate
+from matplotlib.style import context
+from .models import User
 
 from django.contrib.auth.hashers import make_password, check_password #비밀번호 암호화 / 패스워드 체크(db에있는거와 일치성확인)
 from . import movSel
 
 from . import movie10
 import csv
+import json
 
 # Create your views here.
 def register(request):   #회원가입 페이지를 보여주기 위한 함수
@@ -65,9 +68,17 @@ def home(request):
         'username' : None
     }
     if user_id :
-        myuser_info = User.objects.get(pk=user_id)  #pk : primary key
-        context['username'] = myuser_info
+        myuser_info = User.objects.get(pk=user_id)
+        context['username'] = myuser_info.username
         context['login'] = True
+        context['setting'] = myuser_info.datasetting==True
+        if myuser_info.datasetting == True :
+            data = movSel.getMoviedata(myuser_info.usermovieid)
+            context['movie_id'] = data['id']
+            context['title'] = data['title']
+            context['original_title'] = data['original_title']
+            context['original_language'] = data['original_language']
+            context['poster_path'] = data['poster_path']
         return render(request, 'home.html',context)
 
     return render(request, 'home.html', context) #session에 user가 없다면, (로그인을 안했다면)
@@ -95,7 +106,7 @@ def SearchMovie(request):
             context = {
                 'movies' : data
             }
-            render(request,'movSel.html',context)
+            return render(request,'movSel.html',context)
 
 
         return render(request, 'searchmovie.html',response_data)
@@ -105,12 +116,15 @@ def movieSelect(request):
     return render(request, 'movSel.html', context) 
 
 def movieview(request):
-    moviedata = request.GET.get('moviedata',None)
+    title = request.GET.get('title',None)
+    ori_title = request.GET.get('original_title',None)
+    ori_lang = request.GET.get('original_language',None)
+    poster_path = request.GET.get('poster_path',None)
     context = {
-        'poster_url' : movSel.IMG_BASE_URL+movSel.IMG_SIZE[1]+moviedata['poster_path'],
-        'moviename' : moviedata['title']+f"({moviedata['original_title']},{moviedata['original_language']})"
+        'poster_url' : movSel.IMG_BASE_URL+movSel.IMG_SIZE[1]+poster_path,
+        'moviename' : title+f"({ori_title},{ori_lang})"
     }
-    return render(request, 'movieview.html', context) 
+    return render(request, 'movview.html', context) 
 
 def csvTomodel(request):
     #csv파일을 DB에 넣는 작업을 할 곳입니다.
@@ -205,3 +219,23 @@ def csvTomodel(request):
 def mainpage(request):
     #이건 나중에 movie10(동현님 모델)이랑 연결하려고 만든 페이지입니다.
     return HttpResponse(a)
+    
+def movieSelectMsg(request):
+    movie_id = request.GET.get('movie_id',None)
+    title = request.GET.get('title',None)
+    ori_title = request.GET.get('original_title',None)
+    ori_lang = request.GET.get('original_language',None)
+    poster_path = request.GET.get('poster_path',None)
+    context = {
+        'movie_id' : movie_id,
+        'title' : title,
+        'original_title' : ori_title,
+        'original_language' : ori_lang,
+        'poster_path' : poster_path
+    }
+    user_id = request.session.get('user')
+    user = User.objects.get(pk=user_id)
+    user.datasetting = True
+    user.usermovieid = movie_id
+    user.save()
+    return render(request, 'movSelmsg.html',context)

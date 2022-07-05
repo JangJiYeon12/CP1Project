@@ -21,15 +21,31 @@
       <p>Select Movie to MOVIYAAAA</p>
     </div>
   </div>
-  <div class="content">자신이 찾는 영화를 선택해 주세요</div>
-  <br><br><br><br><br><br>
-  {% for movie in movies%}
-    <iframe src="{% url 'movview' %}?moviedata=movie"></iframe>
-  {% endfor %}
+  자신이 찾는 영화를 선택해 주세요
+  <br><br><br>
+  <table border="1">
+    <th>영화</th>
+    <th>선택</th>
+      {% for movie in movies%}
+      <tr>
+        <td>
+          <div style="width:500px; height:300px; background-color:#CF0">
+            <iframe src="{% url 'movview' %}?title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}" height="300" width="500"></iframe>
+          </div>
+        </td>
+        <td>
+          <a href="{%  url 'movSmsg' %}?movie_id={{movie.id}}&title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}">
+            <input type="button" class="btn btn-outline-light" value="선택">
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+  </table>
   <br><br><br>
   <a href="{%  url 'searchmovie' %}">
     <div class="btn-group">
     <input type="button" value="다시 검색하기">
     </div>
   </a>
+  <br><br><br>
 </form>
