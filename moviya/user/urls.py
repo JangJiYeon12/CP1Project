@@ -10,4 +10,5 @@ urlpatterns = [
     path('movview/', views.movieview ,name = 'movview'),
     path('movSel/', views.movieSelect, name = 'movSel'),
     path('mainpage/', views.mainpage, name = 'mainpage'),
+    path('csvToModel/', views.csvTomodel, name = 'csvToModel'),
 ]

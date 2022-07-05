@@ -1,13 +1,14 @@
+from pickletools import read_unicodestringnl
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.hashers import make_password
-from .models import User
+from .models import User, Movie, Rate
 
-from .models import User
 from django.contrib.auth.hashers import make_password, check_password #비밀번호 암호화 / 패스워드 체크(db에있는거와 일치성확인)
 from . import movSel
 
 from . import movie10
+import csv
 
 # Create your views here.
 def register(request):   #회원가입 페이지를 보여주기 위한 함수
@@ -111,7 +112,96 @@ def movieview(request):
     }
     return render(request, 'movieview.html', context) 
 
+def csvTomodel(request):
+    #csv파일을 DB에 넣는 작업을 할 곳입니다.
+
+    #바로 아래 주석처리된 이건 자꾸 typeerror가 나서 버렸습니다
+    #movie_id를 int인거 확인했는데 자꾸 숫자가 아닌게 들어갔다고 뜹니다.
+    #https://continuous-development.tistory.com/105 를 참고했습니다.
+    """
+    path = 'C:/Users/Coke/playground/Section5/cp1project/CP1Project/moviya/user/data/m_list.csv'
+    file = open(path, 'r', encoding="UTF-8")
+    reader = csv.reader(file)
+    print('------', reader)
+
+    list = []
+    for row in reader:
+        list.append(Movie(
+            movie_id=row[0],
+            title=row[1],
+            genres=row[2]))
+    
+    Movie.objects.bulk_create(list)
+
+    path2 = 'C:/Users/Coke/playground/Section5/cp1project/CP1Project/moviya/user/data/filtered_rate.csv'
+    file2 = open(path2, 'r', encoding="UTF-8")
+    reader2 = csv.reader(file2)
+    print('------', reader)
+
+    list2 = []
+    for row in reader2:
+        list2.append(Rate(
+            movie_id=row[0],
+            mean=row[1],
+            count=row[2],
+            username=row[3],
+            rating=row[4]))
+    
+    Rate.objects.bulk_create(list2)    
+
+    return HttpResponse('create model')
+    """
+    #이건 https://fierycoding.tistory.com/64 를 참고했습니다.
+    data = None
+    file_dir = 'C:/Users/Coke/playground/Section5/cp1project/CP1Project/moviya/user/data/'
+
+    def read_data(table_name):
+        with open(file_dir + f'{table_name}.csv', 'r', encoding='UTF-8') as csvfile:
+            reader = csv.reader(csvfile)
+            global data
+            data = list(reader)
+        return
+    
+    def footer(table_name, class_name, bulk_list):
+        class_name.objects.bulk_create(bulk_list)
+        
+        with open(file_dir + f'{table_name}.csv', 'w') as csvfile:
+            writer = csv.writer(csvfile)
+        return
+    
+    
+    #m_list테이블을 만들기 위한 m_list테이블
+    read_data('m_list')
+    if not data:
+        return HttpResponse('Nothing to update') #데이터가 없다고 떠서 진행 못하는 중입니다.
+
+    arr = []
+    for row in data:
+        arr.append(Movie(
+            movie_id=row[0],
+            title=row[1],
+            genres=row[2]))
+
+    footer('m_list', Movie, arr)
+
+    #pivot테이블을 만들기 위한 레이트테이블
+    read_data('filtered_rate')
+    if not data:
+        return HttpResponse('Nothing to update')
+
+    arr = []
+    for row in data:
+        arr.append(Rate(
+            movie_id=row[0],
+            mean=row[1],
+            count=row[2],
+            username=row[3],
+            rating=row[4]))
+            
+    footer('filtered_rate', Rate, arr)
+    return HttpResponse('Rate table updated')
+
 
 def mainpage(request):
-
-    return HttpResponse('살려줘 으악.')
+    #이건 나중에 movie10(동현님 모델)이랑 연결하려고 만든 페이지입니다.
+    return HttpResponse(a)

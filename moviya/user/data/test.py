@@ -36,11 +36,15 @@ def print_similar_movies(index) :
 
             movie_list.append(get_movie.to_frame().reset_index().set_index('index'))
 
+    a = []
     m = pd.DataFrame()   
     for i in movie_list:
         m = pd.concat([m,i])
+        a.append(i)
     m = m.reset_index()
     m.columns = ['영화코드','영화명']
+    r = ''.join(a)
+    print(r)
     return m
 
-print(print_similar_movies(791373))
+print_similar_movies(791373)
