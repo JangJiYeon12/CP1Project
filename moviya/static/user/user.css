@@ -4,6 +4,10 @@ h1 {
     font-family: 'Lobster';
 }
 
+a:hover { 
+    text-decoration:none
+}
+
 body {
     background-color: rgb(223, 223, 223);
 }

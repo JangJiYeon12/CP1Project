@@ -1,7 +1,7 @@
 import requests
 
 
-api_key = '99466f67aa497221d40f4e461bd31161'
+api_key = 'bd7066a3afac2a57330952c5ad6591cd'
 BASE_URL = 'https://api.themoviedb.org/3'
 
 def imgconfig(wsize) :
