@@ -21,25 +21,23 @@
     <br><br><br><br><br><br>
     
     <a href="{%  url 'login' %}">
-        <div class="btn2">
-        <input type="button" class="btn btn-outline-light" value="로그인">
-        </div>
+        <button class="btn2" type="button">로그인</button>
     </a>
     
     <br><br><br>
     
     <a href="{%  url 'register' %}">
-        <div class="btn1">
-        <input type="button" class="btn btn-outline-light" value="회원등록">
-        </div>
+        <button class="btn1" type="button">회원등록</button>
     </a>
     
     {% else %}
     <p align="center">
+        <div class="text">
         {{ username }} 님 안녕하세요!
+        </div>
         <br><br>
         <a href="{%  url 'logout' %}">
-            <input type="button" value="로그아웃">
+            <input type="button" class="btn2" value="로그아웃">
         </a>
     </p>
     <br><br><br>
@@ -58,11 +56,11 @@
     {% endfor %}
     <br><br><br>
     {% else %}
+    <div class="text">
     사용자 설정이 되어 있지 않습니다. {{username}} 님이 좋아하는 영화를 등록해 주세요.
+    </div>
     <a href="{%  url 'searchmovie' %}">
-        <div class="btn-group">
-        <input type="button" value="영화 찾기">
-        </div>
+        <input type="button" class="btn-group2" value="영화 찾기">
     </a>
     {% endif %}
     

@@ -23,29 +23,97 @@ body {
 }
 
 .btn1 {
-    color: #c02626;
+    border: 2px solid #3c6977;
+    color: #6e6e6e;
     text-decoration: none;
     position: absolute;
-    top: 10%;
+    padding: 7px 15px;
+    border-radius: 18px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    display: inline-block;
     left: 90%;
+    top: 10%;
     
     transform: translate(-50%, -50%);
 }
 
+.btn1:hover {
+    background-color: #3c6977;
+    color: #6e6e6e;
+}
+
 .btn2 {
-    color: #c02626;
+    border: 2px solid #3c6977;
+    color: #6e6e6e;
     text-decoration: none;
     position: absolute;
+    padding: 7px 15px;
+    border-radius: 18px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    display: inline-block;
+    left: 80%;
     top: 10%;
+    
+    transform: translate(-50%, -50%);
+}
+
+.btn2:hover {
+    background-color: #3c6977;
+    color: #6e6e6e;
+}
+
+.btn-group {
+    border: 2px solid #37555e;
+    color: #d4d4d4;
+    text-decoration: none;
+    position: absolute;
+    padding: 7px 17px;
+    border-radius: 18px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    display: inline-block;
+    left: 50%;
+    
+    transform: translate(-50%, -50%);
+}
+
+.btn-group:hover {
+    background-color: #3c6977;
+    color: #6e6e6e;
+}
+
+.btn-group2 {
+    border: 2px solid #37555e;
+    color: #d4d4d4;
+    text-decoration: none;
+    position: absolute;
+    padding: 7px 17px;
+    border-radius: 18px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    display: inline-block;
     left: 80%;
     
     transform: translate(-50%, -50%);
 }
 
-.btn-group {
-    color: #c23434;
-    top: 90%;
-    left: 40%;
+.btn-group2:hover {
+    background-color: #3c6977;
+    color: #6e6e6e;
 }
 
 .content {
@@ -58,7 +126,7 @@ body {
 }
 
 .form-group {
-    height: 90px;
+    height: 120px;
     width: 300px; /* 정렬하려는 요소의 넓이를 반드시 지정 */
     margin: 50px auto;
     color: white;
@@ -66,8 +134,20 @@ body {
 
 .box {
     width: 400px;
-    margin: 30px auto;
-    background-color: rgb(199, 199, 199);
-    border: 3px solid #4d4d4d;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 100px auto;
+    background-color: rgb(68, 68, 68);
+    border: 2px solid #638cb3;
     padding: 50px;
+    transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+}
+
+.box:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transform: translateY(-10px);
+  }
+
+.text {
+    font-size: 13pt;
 }
