@@ -27,7 +27,7 @@
     <br><br><br>
     
     <a href="{%  url 'register' %}">
-        <button class="btn1" type="button">회원등록</button>
+        <button class="btn1" type="button">회원가입</button>
     </a>
     
     {% else %}
@@ -45,13 +45,13 @@
     <p align="center">
         Selected Movie
         <br><br><br>
-        <iframe src="{% url 'movview' %}?title={{title}}&original_title={{original_title}}&original_language={{original_language}}&poster_path={{poster_path}}" height="320" width="200" style="background-color: #CF0;"></iframe>
+        <iframe src="{% url 'movview' %}?title={{title}}&original_title={{original_title}}&original_language={{original_language}}&poster_path={{poster_path}}" height="350" width="200" style="background-color: rgb(199, 199, 199);"></iframe>
         <br><br><br>
         Recommended
     </p>
     <br>
     {% for movie in movie_list%}
-        <iframe src="{% url 'movview' %}?title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}" style="width:200px; height: 320px; background-color:#CF0;float:left;text-align: center;"></iframe>
+        <iframe src="{% url 'movview' %}?title={{movie.title}}&original_title={{movie.original_title}}&original_language={{movie.original_language}}&poster_path={{movie.poster_path}}" style="width:200px; height: 350px; background-color:rgb(199, 199, 199);float:left;text-align: center;"></iframe>
         
     {% endfor %}
     <br><br><br>

@@ -25,7 +25,7 @@ def print_similar_movies(index) :
         get_movie = m_list.loc[m_list['movie_id']==index]['title']
         indices_flat = indices.flatten()[i]
         get_movie = m_list.loc[m_list['movie_id']==movie_wide.iloc[indices_flat,:].name][['movie_id','title']]
-        if not get_movie.empty :
+        if not get_movie.empty and get_movie.iloc[0].tolist()[0] != index:
             mov = get_movie.iloc[0].tolist()[0]
             movie_list.append(mov)
     return movie_list
