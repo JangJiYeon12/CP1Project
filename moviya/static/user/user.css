@@ -72,7 +72,7 @@ body {
 
 .btn-group {
     border: 2px solid #37555e;
-    color: #d4d4d4;
+    color: #6e6e6e;
     text-decoration: none;
     position: absolute;
     padding: 7px 17px;
@@ -95,7 +95,7 @@ body {
 
 .btn-group2 {
     border: 2px solid #37555e;
-    color: #d4d4d4;
+    color: #6e6e6e;
     text-decoration: none;
     position: absolute;
     padding: 7px 17px;
@@ -150,4 +150,12 @@ body {
 
 .text {
     font-size: 13pt;
+}
+
+.error {
+    font-size: 13pt;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
